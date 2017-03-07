@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>drupolymer-paper-radio-group test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../drupolymer-paper-radio-group.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <drupolymer-paper-radio-group></drupolymer-paper-radio-group>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('drupolymer-paper-radio-group', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'drupolymer-paper-radio-group');
+        });
+      });
+    </script>
+  </body>
+</html>

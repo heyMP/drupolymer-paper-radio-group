@@ -1,0 +1,46 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../paper-radio-button/paper-radio-button.html">
+
+
+<!--
+`drupolymer-paper-radio-buttons`
+
+
+@demo demo/index.html 
+-->
+
+<dom-module id="drupolymer-paper-radio-buttons">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-radio-group selected="{{selected}}">
+      <template is="dom-repeat" items="[[options]]">
+        <paper-radio-button name="[[item.value]]">[[item.display]]</paper-radio-button>
+      </template>
+    </paper-radio-group>
+    <div class="drupal-form-elements element-invisible" aria-hidden="true">
+      <content></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'drupolymer-paper-radio-buttons',
+
+      properties: {
+        options: {
+          type: Object,
+        },
+        selected: {
+          type: String,
+          value: null
+        }
+      }
+    });
+  </script>
+</dom-module>
