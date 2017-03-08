@@ -10,19 +10,22 @@
 @demo demo/index.html 
 -->
 
-<dom-module id="drupolymer-paper-radio-buttons">
+<dom-module id="drupolymer-paper-radio-group">
   <template>
     <style>
       :host {
         display: block;
       }
+      .drupal-form-elements {
+        display: none;
+      }
     </style>
     <paper-radio-group selected="{{selected}}">
-      <template is="dom-repeat" items="[[options]]">
-        <paper-radio-button name="[[item.value]]">[[item.display]]</paper-radio-button>
+      <template is="dom-repeat" items="{{options}}">
+        <paper-radio-button class="button" name$="{{item.value}}">{{item.display}}</paper-radio-button>
       </template>
     </paper-radio-group>
-    <div class="drupal-form-elements element-invisible" aria-hidden="true">
+    <div class="drupal-form-elements" aria-hidden="true">
       <content></content>
     </div>
   </template>
@@ -30,7 +33,7 @@
   <script>
     Polymer({
 
-      is: 'drupolymer-paper-radio-buttons',
+      is: 'drupolymer-paper-radio-group',
 
       properties: {
         options: {
@@ -40,6 +43,17 @@
           type: String,
           value: null
         }
+      },
+      ready: function() {
+        // this.$$(selector) is a shorthand for Polymer.dom(this.root).querySelector('paper-radio-group')
+        const radios = this.$$('paper-radio-group');
+        const drupalFormContainer = this.$$('.drupal-form-elements');
+        // if the polymer radios get clicked, reflect that click onto
+        radios.addEventListener('click', function() {
+          const selected = radios.querySelector('paper-radio-button[checked]');
+          const value = selected.getAttribute('name');
+          drupalFormContainer.querySelector('input[value="'+value+'"]').click();
+        });
       }
     });
   </script>
